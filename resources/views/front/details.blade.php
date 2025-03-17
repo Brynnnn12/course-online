@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('css/output.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/output.css') }}" rel="stylesheet"> --}}
+    <link rel="stylesheet" href="{{ secure_asset('css/output.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
     <!-- CSS -->
@@ -35,24 +36,30 @@
                 </li>
             </ul>
             @auth
-            <div class="flex gap-[10px] items-center">
-                <div class="flex flex-col items-end justify-center">
-                    <p class="font-semibold text-white">Hi, {{Auth::user()->name}}</p>
-                    @if(Auth::user()->hasActiveSubscription())
-                    <p class="p-[2px_10px] rounded-full bg-[#FF6129] font-semibold text-xs text-white text-center">PRO
-                    </p>
-                    @endif
+                <div class="flex gap-[10px] items-center">
+                    <div class="flex flex-col items-end justify-center">
+                        <p class="font-semibold text-white">Hi, {{ Auth::user()->name }}</p>
+                        @if (Auth::user()->hasActiveSubscription())
+                            <p class="p-[2px_10px] rounded-full bg-[#FF6129] font-semibold text-xs text-white text-center">
+                                PRO
+                            </p>
+                        @endif
+                    </div>
+                    <div class="w-[56px] h-[56px] overflow-hidden rounded-full flex shrink-0">
+                        <img src="{{ Storage::url(Auth::user()->avatar) }}" class="object-cover w-full h-full"
+                            alt="photo">
+                    </div>
                 </div>
-                <div class="w-[56px] h-[56px] overflow-hidden rounded-full flex shrink-0">
-                    <img src="{{ Storage::url(Auth::user()->avatar)}}" class="object-cover w-full h-full" alt="photo">
-                </div>
-            </div>
             @endauth
             @guest
-            <div class="flex gap-[10px] items-center">
-                <a href="{{route('register')}}" class="text-white font-semibold rounded-[30px] p-[16px_32px] ring-1 ring-white transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">Sign Up</a>
-                <a href="{{route('login')}}" class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980]">Sign In</a>
-            </div>
+                <div class="flex gap-[10px] items-center">
+                    <a href="{{ route('register') }}"
+                        class="text-white font-semibold rounded-[30px] p-[16px_32px] ring-1 ring-white transition-all duration-300 hover:ring-2 hover:ring-[#FF6129]">Sign
+                        Up</a>
+                    <a href="{{ route('login') }}"
+                        class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#FF6129] transition-all duration-300 hover:shadow-[0_10px_20px_0_#FF612980]">Sign
+                        In</a>
+                </div>
             @endguest
 
         </nav>
@@ -464,7 +471,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 
-    <script src="{{ asset('js/main.js') }}"></script>
+    {{-- <script src="{{ asset('js/main.js') }}"></script> --}}
+    <script src="{{ secure_asset('js/main.js') }}" defer></script>
 </body>
 
 </html>
