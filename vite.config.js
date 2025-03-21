@@ -11,9 +11,4 @@ export default defineConfig({
     server: {
         origin: "https://course-online-production.up.railway.app", // Pakai HTTPS
     },
-    build: {
-        outDir: "public/build", // Pastikan hasil build ke folder publik
-        emptyOutDir: true,
-        manifest: true,
-    },
 });
